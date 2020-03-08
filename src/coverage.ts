@@ -38,7 +38,7 @@ async function getCrateNames(root: string): Promise<string[]> {
 
 async function getCoverageFiles(root: string): Promise<string[]> {
     const crates = await getCrateNames(root);
-    core.info(`★ Found project crates: ${crates}`);
+    core.info(`FOUND PROJECT CRATES: ${crates}`);
 
     let patterns: string[] = [];
     for (const crate of crates) {
