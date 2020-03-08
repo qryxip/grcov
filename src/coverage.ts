@@ -4,7 +4,6 @@ const fsPromises = require('fs').promises;
 const path = require('path');
 
 const archiver = require('archiver');
-import * as core from '@actions/core';
 const glob = require('fast-glob');
 const toml = require('@iarna/toml');
 
@@ -39,14 +38,14 @@ async function getCrateNames(root: string): Promise<string[]> {
 
 async function getCoverageFiles(root: string): Promise<string[]> {
     const crates = await getCrateNames(root);
-    core.info(`Found project crates: ${crates}`);
+    core.info(`★ Found project crates: ${crates}`);
 
     let patterns: string[] = [];
     for (const crate of crates) {
         const replacement = crate.replace(/-/g, '_');
         patterns.push(`**/${replacement}*.gc*`);
-        core.debug(replacement);
-        core.debug(patterns);
+        core.info(replacement);
+        core.info(patterns);
     }
 
     return glob.sync(patterns, {
