@@ -4,6 +4,7 @@ const fsPromises = require('fs').promises;
 const path = require('path');
 
 const archiver = require('archiver');
+import * as core from '@actions/core';
 const glob = require('fast-glob');
 const toml = require('@iarna/toml');
 
@@ -44,8 +45,8 @@ async function getCoverageFiles(root: string): Promise<string[]> {
     for (const crate of crates) {
         const replacement = crate.replace(/-/g, '_');
         patterns.push(`**/${replacement}*.gc*`);
-        console.error(replacement);
-        console.error(patterns);
+        core.debug(replacement);
+        core.debug(patterns);
     }
 
     return glob.sync(patterns, {
